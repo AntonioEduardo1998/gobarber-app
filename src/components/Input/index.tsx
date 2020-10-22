@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { useField } from '@unform/core';
 import React, {
   forwardRef,
@@ -14,6 +15,7 @@ import { Container, Icon, TextInput } from './styles';
 interface InputProps extends TextInputProps {
   name: string;
   icon: string;
+  containerStyle?: {};
 }
 
 interface InputValueReference {
@@ -25,7 +27,7 @@ interface InputRef {
 }
 
 const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
-  { name, icon, ...rest },
+  { name, icon, containerStyle = {}, ...rest },
   inputRef,
 ) => {
   const inputElementRef = useRef<any>(null);
@@ -67,7 +69,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
   }, [fieldName, registerField]);
 
   return (
-    <Container isFocused={isFocused} isErrored={!!error}>
+    <Container style={containerStyle} isFocused={isFocused} isErrored={!!error}>
       <Icon
         name={icon}
         size={20}
@@ -77,6 +79,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
         ref={inputElementRef}
         placeholderTextColor="#666360"
         onFocus={handleInputFocus}
+        defaultValue={defaultValue}
         onBlur={handleInputBlur}
         onChangeText={value => {
           inputValueRef.current.value = value;

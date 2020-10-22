@@ -37,6 +37,7 @@
     "prettier/prettier": "error",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
+    "import/no-duplicates": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
